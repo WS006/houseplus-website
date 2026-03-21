@@ -5,18 +5,18 @@
     <title>House Plus Group</title>
     <script>
       // GitHub Pages SPA redirect for 404 errors
-      // Redirect to index.html with the path preserved as a query parameter
+      // For custom domain, we don't need the repo name in the path
       var l = window.location;
       
       // Only redirect if we're not already at the index page
       if (!l.pathname.includes('index.html')) {
-        // Extract the path after /House-Plus-Group/
-        var pathAfterBase = l.pathname.replace('/House-Plus-Group/', '');
+        // Get the path as-is (without repo name since we're using custom domain)
+        var path = l.pathname;
         
         // Redirect to index.html with the path as query parameter
         l.replace(
           l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          '/House-Plus-Group/index.html?redirect=' + encodeURIComponent('/' + pathAfterBase)
+          '/index.html?redirect=' + encodeURIComponent(path)
         );
       }
     </script>
