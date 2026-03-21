@@ -45,9 +45,15 @@ function Router() {
   // GitHub Pages SPA routing fix
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
     const p = params.get('p');
-    if (p && p !== '') {
-      // Restore the original path
+    
+    // Handle redirect from 404.html
+    if (redirect && redirect !== '') {
+      window.history.replaceState(null, '', redirect);
+    }
+    // Handle old p parameter format
+    else if (p && p !== '') {
       window.history.replaceState(null, '', '/' + p);
     }
   }, []);
