@@ -4,15 +4,26 @@
 
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { updatePageMeta } from '@/lib/seo';
 import { Calendar, ChevronRight, Tag } from 'lucide-react';
+import { useEffect } from 'react';
 import { Link } from 'wouter';
 
 const NEWS_ARTICLES = [
   {
+    id: 'company-introduction-2026',
+    title: 'House Plus Group: Bridging China and Africa Through Quality Manufacturing',
+    excerpt: 'Discover House Plus Group\'s journey from a small manufacturing operation to a trusted global supplier serving 50+ countries. Learn about our mission, values, and commitment to quality.',
+    category: 'Company News',
+    date: '2026-03-23',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
+    tags: ['Company', 'Introduction', 'Manufacturing', 'Africa', 'China'],
+  },
+  {
     id: 'solar-africa-2024',
     title: 'House Plus Group Expands Solar Product Line for African Market',
     excerpt: 'House Plus Group announces the launch of 15 new solar energy products specifically designed for African market conditions, including high-temperature resistant solar panels and robust inverters.',
-    category: 'Company News',
+    category: 'Product Launch',
     date: '2024-02-15',
     image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80',
     tags: ['Solar', 'Africa', 'New Products'],
@@ -68,6 +79,11 @@ const CATEGORIES = ['All', 'Company News', 'Product Launch', 'Market News', 'Bus
 
 export default function News() {
   const { t } = useLanguage();
+
+  // Update page metadata for SEO
+  useEffect(() => {
+    updatePageMeta('news');
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -136,6 +152,20 @@ export default function News() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Contact CTA */}
+        <div className="mt-16 bg-gradient-to-r from-[#0f2d5e] to-[#1a3a7a] rounded-2xl p-8 sm:p-12 text-center">
+          <h3 className="text-2xl sm:text-3xl font-black text-white mb-4">Stay Updated with House Plus Group</h3>
+          <p className="text-white/80 mb-6 max-w-2xl mx-auto">Get the latest news about our products, company updates, and industry insights. Contact us for more information or partnership opportunities.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" className="inline-flex items-center justify-center gap-2 bg-[#f59e0b] hover:bg-[#d97706] text-[#0f2d5e] font-bold px-6 py-3 rounded-xl transition-colors">
+              Get in Touch <ChevronRight className="w-4 h-4" />
+            </a>
+            <a href="https://wa.me/2349078080738" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 text-white font-semibold px-6 py-3 rounded-xl transition-colors backdrop-blur-sm">
+              WhatsApp Us
+            </a>
+          </div>
         </div>
       </div>
     </div>
