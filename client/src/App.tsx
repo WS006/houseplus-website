@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
+import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -41,6 +42,22 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 }
 
 function Router() {
+  // GitHub Pages SPA routing fix
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+    const p = params.get('p');
+    
+    // Handle redirect from 404.html
+    if (redirect && redirect !== '') {
+      window.history.replaceState(null, '', redirect);
+    }
+    // Handle old p parameter format
+    else if (p && p !== '') {
+      window.history.replaceState(null, '', '/' + p);
+    }
+  }, []);
+
   return (
     <Switch>
       <Route path="/" component={() => <Layout><Home /></Layout>} />

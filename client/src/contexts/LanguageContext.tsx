@@ -20,7 +20,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem('houseplus_lang') as Language;
     if (saved && LANGUAGES.some(l => l.code === saved)) return saved;
-    return detectBrowserLanguage();
+    // Default to English for all users
+    return 'en';
   });
 
   const setLanguage = (lang: Language) => {

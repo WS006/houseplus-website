@@ -6,7 +6,6 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { productsStore } from '@/lib/store';
-import { updatePageMeta } from '@/lib/seo';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Award, CheckCircle, ChevronLeft, ChevronRight, Factory, Globe, Package, Shield, Star, TrendingUp, Users, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -91,11 +90,6 @@ export default function Home() {
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const products = productsStore.getAll();
   const hotProducts = products.filter(p => p.isHot).slice(0, 6);
-
-  // Update page metadata for SEO
-  useEffect(() => {
-    updatePageMeta('home');
-  }, []);
 
   // Auto-play carousel
   useEffect(() => {
